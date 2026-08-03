@@ -160,7 +160,7 @@ message ToolCompositeExecution {
     float trd_theo_edge_unit = 526; // theo edge normalized to $100 underlier
     float cl_arrive_pn_l = 529; // arrival PnL (client arrival mark to fill mark) [from clArriveMark on parent order if any]
     float arrive_pn_l = 532; // arrival PnL (parent arrival mark to fill mark)
-    float arrive_dn_pn_l = 535; // arrival Dn PnL (arrivalPnL - uDriftArrivalPnL)
+    float arrive_dn_pn_l = 535; // arrival Dn PnL (arrivalPnL + uDriftArrivalPnL)
     float u_drift_arrive_pn_l = 538; // underlier delta drift PnL (arrival uMark to fill uMark)
     float child_limit_slip = 541; // Fill Slippage (ChildLimitPrice to FillPrice)
     float half_width_pn_l = 544; // estimated half-width PnL

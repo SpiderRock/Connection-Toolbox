@@ -29,8 +29,9 @@ message AccountRouteConfig {
 
     message ExchControl {
         
-        string ex_dest = 194; // exchange (eg. NYSESTK, CBOEOPT, NMS$OPT, NMS$STK, CMX$FUT) or custom (eg. INET$NIGHTHAWK)
+        string ex_dest = 194; // exchange (eg. NYSESTK, CBOEOPT, NMS$OPT, NMS$STK, CMX$FUT) or external broker algo (eg. #NIGHTHAWK#STK / #NIGHTHAWK#OPT)
         YesNo disable = 163;
+        string extern_params = 195; // algo params for '#'-style algo exDest entries (tag=value;tag=value;tag=value)
     }
 
     message ExecBrkrAccnts {
@@ -64,7 +65,6 @@ message AccountRouteConfig {
     CatDeptType cat_dest_dept_type = 109; // CAT destination department type
     RoutingRule routing_rule = 145;
     string backup_route_code = 154; // backup route code (if above are unavailable)
-    string extern_params = 166; // pass through params (must be understood by end point handler) usually [tag=value;tag=value;tag=value]
     string comment = 169; // maintainer commments
     string modified_by = 172; // user who last modified this record
     SysEnvironment modified_in = 175;

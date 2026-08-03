@@ -68,6 +68,12 @@ message SpdrParentLimit {
     google.protobuf.Timestamp start_dttm = 205;
     int32 active_duration = 406; // [optional] (number of seconds)
     int32 progress_expose_time = 214; // minimum time (secs) to expose order (0 = no minimum; used to guarantee that the order is exposed at mid-market for some time before actively taking) (If the order is an Alpha type order, updating this will reset the alpha progression)
+    float max_acc_day_wt_vega_ln = 420; // max accnt day (time weighted) vega long (positive number;-1=no limit);risk limit = max limit - (current net counter - offset)
+    float max_acc_day_wt_vega_sh = 421; // max accnt day (time weighted) vega short (positive number;-1=no limit);risk limit = max limit + (current net counter - offset)
+    float acc_day_wt_vega_offset = 422; // accnt day (time weighted) vega offset (target position)
+    float max_acc_day_dDelta_ln = 423; // max accnt day $delta long (positive number;-1=no limit);risk limit = max limit - (current net counter - offset)
+    float max_acc_day_dDelta_sh = 424; // max accnt day $delta short (positive number;-1=no limit);risk limit = max limit + (current net counter - offset)
+    float acc_day_dDelta_offset = 425; // accnt day $delta offset (target position)
     float exp_day_wt_vega_offset = 241; // max acct+symbol day wtVega offset (target)
     float max_exp_day_wt_vega_ln = 235; // max accnt+expiration day (time weighted) vega long (positive number;-1=no limit);risk limit = max limit - (current net counter - offset)
     float max_exp_day_wt_vega_sh = 238; // max accnt+expiration day (time weighted) vega short (positive number;-1=no limit);risk limit = max limit + (current net counter - offset)

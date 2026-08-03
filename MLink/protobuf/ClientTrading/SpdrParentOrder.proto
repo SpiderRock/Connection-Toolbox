@@ -178,7 +178,8 @@ message SpdrParentOrder {
     int32 min_mkt_on_close_pct = 223; // Minimum pct [0 - 100] of order reserved for the on-close (MOC) auction
     TriggerType trigger_type = 226; // type of trigger (PrintVol/SurfVol only for options) [print = print or actionable quote]
     float trigger_level = 229; // stop/trigger level for parent order to go active (can be either a price or vol)
-    AuctionResponder auction_responder = 232; // if set, parent order can be an auction responder
+    AuctionResponder auction_responder = 232; // if set, parent order can be an auction responder [None=inherit account; Any=force-on; Disable=force-off exchange/away auction responding]
+    AtsAuctionEngage ats_auction_engage = 1076; // per-order opt-out of SR ATS auctions: None=inherit account algoFlash/algoBlockPct; Disable=do not algo-initiate flash/block AND do not respond to SR flash auctions
     float max_make_exch_fee = 235; // maximum making exchange fee (in point value) [zero = no limit; use non-zero number for limit to apply]
     float max_take_exch_fee = 238; // maximum taking exchange fee (in point value) [zero = no limit; use non-zero number for limit to apply]
     IncExchFee inc_take_exch_fee = 241; // include exchange fee in probability and surface based take limit calculations
@@ -205,7 +206,7 @@ message SpdrParentOrder {
     SpdrLimitType order_limit_type = 304;
     SpdrLimitClass take_limit_class = 307; // Simple = LimitPrice +/- offset, Surface = BEST(LimitPrice, SurfLimit), Probability = BEST(LimitPrice, ProbLimit), SurfProb  = BEST(LimitPrice, SurfLimit, ProbLimit)
     SpdrLimitClass make_limit_class = 310; // Simple = LimitPrice +/- offset, Surface = BEST(LimitPrice, SurfLimit), Probability = BEST(LimitPrice, ProbLimit), SurfProb  = BEST(LimitPrice, SurfLimit, ProbLimit)
-    ReachRule take_reach_rule = 313; // None = size immediately available; Delayed = available after [1-3] seconds; Passive = available if contra side aggresses; WeakOnly = only take if available size < avgMarketSize; ISOSweep = Intermarket Sweep [requires WaitTrigger]
+    ReachRule take_reach_rule = 313; // None = size immediately available; Delayed = available after [1-3] seconds; Passive = available if contra side aggresses; WeakOnly = only take if available size < avgMarketSize; ISOSweep = Intermarket Sweep [requires WaitTrigger]; Pct2p5/Pct10/Pct25 = DEPRECATED (degrossing balance tolerance removed in plan 2.1; values retained for wire compat, unreferenced by code)
     double order_prc_limit = 316; // Applies if LimitType = Prc[]
     double order_ref_uPrc = 319; // default=underlier.mid
     float order_ref_delta = 322; // default=option.delta
@@ -278,6 +279,12 @@ message SpdrParentOrder {
     float order_ref_rMetric5 = 475; // user supplied RMetric5 value (used in RiskGroupID risk controls) [netRMetric5 = sum(fillQty * orderRefRMetric5 * underlierPerCn)]
     float order_ref_rMetric6 = 478; // user supplied RMetric6 value (used in ExpDay risk controls) [netRMetric6 = sum(fillQty * orderRefRMetric6 * underlierPerCn)]
     float order_ref_rMetric7 = 481; // user supplied RMetric7 value (used in SymDay risk controls) [netRMetric7 = sum(fillQty * orderRefRMetric7 * underlierPerCn)]
+    float max_acc_day_wt_vega_ln = 1082; // max accnt day (time weighted) vega long (positive number;-1=no limit);risk limit = max limit - (current net counter - offset)
+    float max_acc_day_wt_vega_sh = 1083; // max accnt day (time weighted) vega short (positive number;-1=no limit);risk limit = max limit + (current net counter - offset)
+    float acc_day_wt_vega_offset = 1084; // accnt day (time weighted) vega offset (target position)
+    float max_acc_day_dDelta_ln = 1085; // max accnt day $delta long (positive number;-1=no limit);risk limit = max limit - (current net counter - offset)
+    float max_acc_day_dDelta_sh = 1086; // max accnt day $delta short (positive number;-1=no limit);risk limit = max limit + (current net counter - offset)
+    float acc_day_dDelta_offset = 1087; // accnt day $delta offset (target position)
     float exp_day_wt_vega_offset = 529; // max acct+symbol day wtVega offset (target)
     float max_exp_day_wt_vega_ln = 523; // max accnt+expiration day (time weighted) vega long (positive number;-1=no limit);risk limit = max limit - (current net counter - offset)
     float max_exp_day_wt_vega_sh = 526; // max accnt+expiration day (time weighted) vega short (positive number;-1=no limit);risk limit = max limit + (current net counter - offset)

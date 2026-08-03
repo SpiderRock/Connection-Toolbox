@@ -261,7 +261,7 @@ message SpdrParentExecutionV2 {
     float hedge_beta_ratio = 808; // portion of executed $delta to auto-hedge (can be 1.0 / Beta for beta hedging) [-4.0 to +4.0])
     HedgeScope hedge_scope = 811; // hedge group scope
     float years = 814; // years to expiration
-    int32 underliers_per_cn = 817; // option delivery underliers per contract
+    double underliers_per_cn = 817; // option delivery underliers per contract
     UnderlierType underlier_type = 820; // type of underlier (affects $greek calculations)
     float tick_value = 823; // $NLV value of a single tick change in display premium	(pointValue = tickValue / tickSize)
     float point_value = 826; // $NLV value of a single point change in display premium (pointValue = tickValue / tickSize)

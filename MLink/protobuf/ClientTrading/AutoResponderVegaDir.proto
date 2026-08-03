@@ -35,8 +35,8 @@ message AutoResponderVegaDir {
     YesNo can_respond_sR = 142; // if yes, can respond to auction notices from SR
     YesNo can_respond_exch = 143; // if yes, can respond to auction notices from exchanges
     CallPut cp_flag = 105; // if not Pair must match all option legs
-    float min_xDelta = 110; // all leg xDelta must be between [minXDelta, maxXDelta]
-    float max_xDelta = 111;
+    float min_abs_delta = 110; // all leg delta must be between [minAbsDelta, maxAbsDelta]
+    float max_abs_delta = 111;
     double min_strike = 112; // all leg strikes must be between [minStrike, maxStrike]
     double max_strike = 113;
     ClientSurface client_vol_surface = 159;

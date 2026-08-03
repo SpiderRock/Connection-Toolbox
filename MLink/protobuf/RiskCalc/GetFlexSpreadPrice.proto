@@ -43,6 +43,7 @@ message GetFlexSpreadPrice {
         float vanna_out = 121; // vanna
         float rho_out = 122; // rho
         float phi_out = 123; // phi
+        float delta_decay_out = 142; // delta decay
         string error_out = 124; // leg error (if any)
     }
 
@@ -64,6 +65,7 @@ message GetFlexSpreadPrice {
     float sprd_vanna = 132; // vanna
     float sprd_rho = 133; // rho
     float sprd_phi = 134; // phi
+    float sprd_delta_decay = 143; // delta decay
     string calc_detail = 138; // calculation details
     string error = 139; // overall error for the calculation
     google.protobuf.Timestamp timestamp = 140;

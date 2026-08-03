@@ -56,7 +56,7 @@ message TradeCubeDetailV5 {
     PriceFormat price_format = 196; // SpiderRock price display format code
     PriceFormat u_price_format = 199; // SpiderRock underlier price display code
     float years = 202; // years to expiration
-    int32 underliers_per_cn = 205; // underliers per contract (futures and options)
+    double underliers_per_cn = 205; // underliers per contract (futures and options)
     UnderlierType underlier_type = 208; // underlier type (affects $greek calcs)
     float tick_value = 211; // $NLV value of a single tick change in display premium	(pointValue = tickValue / tickSize)
     float point_value = 214; // $NLV value of a point
@@ -205,8 +205,8 @@ message TradeCubeDetailV5 {
     float half_width_pnl = 640; // estimated half-width Pnl
     float cl_arrive_pnl = 643; // -dir * qty * (fillPrice - clArriveMark)  # maybe use orderSurfPrc instead
     float arrive_pnl = 646; // -dir * qty * (fillPrice - 0.5 * (orderBid + orderAsk))  # maybe use orderSurfPrc instead
-    float arrive_dn_pnl = 649; // arrivePnl - uDriftArrivePnl
-    float u_drift_arrive_pnl = 652; // -dir * qty * fillDe * (0.5 * (fillUBid + fillUAsk) - 0.5 * (orderUBid + orderUAsk))
+    float arrive_dn_pnl = 649; // arrivePnl + uDriftArrivePnl
+    float u_drift_arrive_pnl = 652; // dir * qty * fillDe * (0.5 * (fillUBid + fillUAsk) - 0.5 * (orderUBid + orderUAsk))
     float day_dn_pnl = 655; // delta neutral Pnl (to EOD)
     float day_m1_pnl = 658; // delta neutral Pnl (Fill + 1M)
     float day_m10_pnl = 661; // delta neutral Pnl (Fill + 10M)

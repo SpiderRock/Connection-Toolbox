@@ -1327,7 +1327,8 @@ namespace SpiderRock
 			EU_CZ=74,
 			EU_HU=75,
 			EU_PL=76,
-			CA=77
+			CA=77,
+			NMS_ETH=78
 		};
 
  		enum class TradingSession : Enum 

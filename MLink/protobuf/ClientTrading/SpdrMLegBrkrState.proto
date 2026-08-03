@@ -335,6 +335,10 @@ message SpdrMLegBrkrState {
     float max_grp_day_vega_sh = 958; // max acct+riskGroup day vega short (positive number;-1=no limit);risk limit = max limit + current net counter
     float max_grp_day_vega_abs = 961; // max acct+riskGroup day vega abs (positive number;-1=no limit);risk limit = max limit - abs(current net counter)
     float grp_day_vega_ratio = 964; // target bot / sld ratio (eg ratio=2.0 means that neutral is bot vega = 2x sld vega)
+    float max_acc_day_wt_vega_ln = 1190; // max accnt day (time weighted) vega long (positive number;-1=no limit);risk limit = max limit - (current net counter - offset)
+    float max_acc_day_wt_vega_sh = 1191; // max accnt day (time weighted) vega short (positive number;-1=no limit);risk limit = max limit + (current net counter - offset)
+    float max_acc_day_dDelta_ln = 1192; // max accnt day $delta long (positive number;-1=no limit);risk limit = max limit - (current net counter - offset)
+    float max_acc_day_dDelta_sh = 1193; // max accnt day $delta short (positive number;-1=no limit);risk limit = max limit + (current net counter - offset)
     float max_grp_day_rMetric1_ln = 1048; // max acct+riskGroup day rMetric1 long (positive number;-1=no limit);risk limit = max limit - current net counter
     float max_grp_day_rMetric1_sh = 1049; // max acct+riskGroup day rMetric1 short (positive number;-1=no limit);risk limit = max limit + current net counter
     float max_grp_day_rMetric1_abs = 1050; // max acct+riskGroup day rMetric1 abs (positive number;-1=no limit);risk limit = max limit - abs(current net counter)

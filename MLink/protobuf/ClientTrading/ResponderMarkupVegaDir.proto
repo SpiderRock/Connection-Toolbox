@@ -36,8 +36,8 @@ message ResponderMarkupVegaDir {
     YesNo can_respond_sR = 178; // if yes, can respond to auction notices from SR
     YesNo can_respond_exch = 179; // if yes, can respond to auction notices from exchanges
     CallPut cp_flag = 104; // if not Pair must match all option legs
-    float min_xDelta = 109; // all leg xDelta must be between [minXDelta, maxXDelta]
-    float max_xDelta = 110;
+    float min_abs_delta = 109; // all leg absDelta must be between [minAbsDelta, maxAbsDelta]
+    float max_abs_delta = 110;
     double min_strike = 111; // all leg strikes must be between [minStrike, maxStrike]
     double max_strike = 112;
     ClientSurface client_vol_surface = 219;
@@ -73,7 +73,7 @@ message ResponderMarkupVegaDir {
     int32 cp_flag_skips = 243; // number skipped from cpFlag not matching notice legs CallPut
     int32 flex_skips = 244; // number skipped from flex/listed filter
     int32 ekey_skips = 245; // number skipped from leg ekey mismatch
-    int32 x_delta_range_skips = 246; // number skipped from out of range XDelta value
+    int32 abs_delta_range_skips = 246; // number skipped from out of range delta value
     int32 strike_range_skips = 247; // number skipped from out of range strike
     int32 s_vol_error_skips = 248;
     int32 user_vol_err_skips = 249;

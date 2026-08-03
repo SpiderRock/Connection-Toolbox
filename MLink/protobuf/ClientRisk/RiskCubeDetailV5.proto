@@ -36,6 +36,7 @@ message RiskCubeDetailV5 {
     TickerKey ticker = 124; // Risk Symbol (underlier for equities; product group for future/option complexes)
     string risk_class = 127; // Symbol risk class (from SymbolControl record)
     SymbolType symbol_type = 130; // Symbol type
+    OptRiskClass opt_risk_class = 131;
     float beta = 133; // beta (usually beta to SPX; see AccountConfig.betaSource)
     BetaSource beta_source = 136;
     string sector = 139; // Client defined sector (from SymbolControl record)
@@ -50,6 +51,7 @@ message RiskCubeDetailV5 {
     SkewCode skew_code = 166; // Skew bucket code (Dd=Deep DownSide, Dn = DownSide, At = ATM, Up = UpSide, DU = FarUpSide)
     EDaysCode e_days_code = 169; // Days to next earnings event (if any)
     iVolRange i_vol_range = 172; // Implied ATM Vol Range
+    LiqRange liq_range = 512; // Underlier liquidity range (publisher-classified, 5 levels)
     float skew_dD = 175; // dd (deep downside) skew metric (xde < -0.30)
     float skew_dN = 178; // dn (downside) skew metric (-0.30 < xde < -0.10)
     float skew_aT = 181; // at (atm) skew risk metric (-0.10 < xde < +0.10)
@@ -100,17 +102,17 @@ message RiskCubeDetailV5 {
     float t_vol_move = 310; // LN(tVol / tVolPr)
     float t_edge_move = 313; // LN(tVol / iVol) - LN(tVolPr / iVolPr)
     float t_edge = 316; // LN(tVol / iVol)
-    float opn_pnl_de = 319; // open position * mult * optDelta * dUPrc			( pnlSD = sum(pnlDe) [stock + futures + options] )
-    float opn_pnl_ga = 322; // open position * mult * 0.5 * optGamma * dUPrc * dUPrc
-    float opn_pnl_th = 325; // open position * mult * optTheta * dTime
-    float opn_pnl_ve = 328; // open position * mult * optVega * dVol
-    float opn_pnl_vo = 331; // open position * mult * 0.5 * optVolga * dVol * dVol
+    float opn_pnl_de = 319; // open position * mult * dePr * dUPrc (BS delta PnL; NOT hedgeDe)
+    float opn_pnl_ga = 322; // open position * mult * 0.5 * avg(gamma,gammaPr) * dUPrc * dUPrc
+    float opn_pnl_th = 325; // open position * mult * decomposedTheta(dYearsV, dYearsC)
+    float opn_pnl_ve = 328; // open position * mult * optVega * dVol (includes spot-induced vol change)
+    float opn_pnl_vo = 331; // open position * mult * 0.5 * avg(volga,volgaPr) * dVol * dVol
     float opn_pnl_va = 334; // open position * mult * optVanna * dVol * dUPrc
-    float opn_pnl_sl = 337; // open position * mult * vol/uPrc * slope * optVega * dUPrc
+    float opn_pnl_sl = 337; // open position * mult * vePr * veSlopePr * dUPrc (hedge effect; overlaps with opnPnlVe)
     float opn_pnl_rate = 340; // open position * mult * optRho * dRate
-    float opn_pnl_sDiv = 343; // open position * mult * optPhi * dSDv
-    float opn_pnl_dDiv = 346; // open position * mult * optPhi * dDDv
-    float opn_pnl_err = 349; // unattributed pnl: SR Vol Pnl - opnPnlDe - opnPnlGa - opnPnlTh - opnPnlVe - opnPnlRat - opnPnlSDiv - opnPnlDDiv
+    float opn_pnl_sDiv = 343; // open position * mult * optPhi * dSDiv
+    float opn_pnl_dDiv = 346; // open position * mult * -dePr * dDDiv (uses BS delta, not phi)
+    float opn_pnl_err = 349; // unattributed pnl: opnPnlSv - opnPnlGa - opnPnlTh - opnPnlVe - opnPnlVo - opnPnlVa - opnPnlRate - opnPnlSDiv - opnPnlDDiv
     float opn_edge_change = 352; // open position * mult * (tEdge - tEdgePr) (requires a theo model)
     float pos_delta = 355; // live position * mult * optDelta
     float pos_dDelta = 358; // live position * mult * optDelta * UPrc
@@ -152,7 +154,7 @@ message RiskCubeDetailV5 {
     float borrow_rate = 451; // estimated stock borrow rate (if any)
     double cur_mid_mark = 508; // current mid market price
     int32 model_type = 454; // SRPricingLib.CalcModelType
-    int32 underliers_per_cn = 457; // underliers per contract
+    double underliers_per_cn = 457; // underliers per contract
     UnderlierType underlier_type = 460; // underlier type (used for option pricing)
     float point_value = 463; // value of one point
     Currency point_currency = 466;
@@ -167,6 +169,7 @@ message RiskCubeDetailV5 {
     SpanType vol_span_type = 493; // exchange volSpan type
     SpanPricingModel span_pricing_model = 496; // Exchange-defined model for SPAN option pricing calcs
     MarginType margin_type = 499; // margin slide type: NMS_Equity = +/- 15%, NMS_Index = -8%/+6%, NMS_Medium = +/-10%
+    float kstar = 500; // strike that solves BS(Kstar, surfVol, ...) = BS.AMER(K, surfVol, ...)
     google.protobuf.Timestamp timestamp = 502;
 }
 
