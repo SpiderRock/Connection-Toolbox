@@ -60,6 +60,7 @@ message SpdrParentExecution {
     ExecRole exec_role = 211; // SpiderRock relationship to this execution record
     string exec_brkr_code = 833; // SR Assigned executing broker code
     string exec_brkr_mPID = 217; // FINRA/Assigned exec broker MPID (if any)
+    string alt_brkr_mPID = 885; // SPR-31223: per-client override MPID from ExecBrokerDefinition.ClientFirmList (empty when no override)
     string exec_brkr_accnt = 220; // account at executing broker (if any)
     string exec_brkr_cl_firm = 223; // client/firm at executing broker (if any)
     string exec_brkr_user_name = 226; // userName at execution broker (if any)
@@ -261,7 +262,7 @@ message SpdrParentExecution {
     string user_data2 = 760; // client supplied data field; passes through to parent and child executions and reports as well as FIX drops
     PricingVersion pricing_version = 762;
     float years = 763; // years to expiration
-    int32 underliers_per_cn = 766; // option delivery underliers per contract
+    double underliers_per_cn = 766; // option delivery underliers per contract
     UnderlierType underlier_type = 769; // type of underlier (affects $greek calculations)
     float tick_value = 772; // $NLV value of a single tick change in display premium	(pointValue = tickValue / tickSize)
     float point_value = 775; // $NLV value of a single point change in display premium (pointValue = tickValue / tickSize)
@@ -306,22 +307,22 @@ message SpdrParentExecution {
     SRDataCenter_V7 data_center__v7 = 5000; // only v7: enum values do not match with v8: V7[None=0,NY4=1,NY5=2,CH2=3,CH3=4], V8[Does Not Exist]
     FaceSide face_side__v7 = 5001; // only v7 - enum values match with v8
     FaceShape face_shape__v7 = 5002; // only v7 - enum values match with v8
-    string alt_brkr_mPID__v7 = 5003; // only V7: alias lengths match
-    string child_locate_source__v7 = 5004; // only V7
-    YesNo is_comm_paying__v7 = 5005; // only v7 - enum values match with v8
-    float fill_risk_metric1__v7 = 5006; // only V7
-    float fill_risk_metric2__v7 = 5007; // only V7
-    float fill_risk_metric3__v7 = 5008; // only V7
-    float fill_risk_metric4__v7 = 5009; // only V7
-    float fill_risk_metric5__v7 = 5010; // only V7
-    float fill_risk_metric6__v7 = 5011; // only V7
-    float fill_risk_metric7__v7 = 5012; // only V7
-    float fill_s08_dn__v7 = 5013; // only V7
-    float fill_s06_up__v7 = 5014; // only V7
-    float fill_s15_dn__v7 = 5015; // only V7
-    float fill_s15_up__v7 = 5016; // only V7
-    float fill_s50_dn__v7 = 5017; // only V7
-    float fill_s50_up__v7 = 5018; // only V7
+    string child_locate_source__v7 = 5003; // only V7
+    YesNo is_comm_paying__v7 = 5004; // only v7 - enum values match with v8
+    float fill_risk_metric1__v7 = 5005; // only V7
+    float fill_risk_metric2__v7 = 5006; // only V7
+    float fill_risk_metric3__v7 = 5007; // only V7
+    float fill_risk_metric4__v7 = 5008; // only V7
+    float fill_risk_metric5__v7 = 5009; // only V7
+    float fill_risk_metric6__v7 = 5010; // only V7
+    float fill_risk_metric7__v7 = 5011; // only V7
+    float fill_s08_dn__v7 = 5012; // only V7
+    float fill_s06_up__v7 = 5013; // only V7
+    float fill_s15_dn__v7 = 5014; // only V7
+    float fill_s15_up__v7 = 5015; // only V7
+    float fill_s50_dn__v7 = 5016; // only V7
+    float fill_s50_up__v7 = 5017; // only V7
+    int32 underliers_per_cn__v7 = 5018; // only V7: Field name [underliersPerCn] matched but type did not: double != int
 }
 
 

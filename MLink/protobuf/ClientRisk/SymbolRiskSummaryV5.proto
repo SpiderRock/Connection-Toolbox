@@ -133,8 +133,14 @@ message SymbolRiskSummaryV5 {
     float slope = 421; // Aggregate Position VegaDelta (uPrc/Vol correlation factor);=sum[shCurPosM * opr.sl * opr.ve] + sum[other.slope]
     float avega = 424; // Aggregate Postion Abs Vega;=sum[abs(shCurPosM ) * opr.ve]
     float atheta = 427; // Aggregate Postion Abs Theta;= sum[abs(shCurPosM) * opr.th]
-    float hedge_gamma = 430; // Aggregate Postion Hedge Gamma (either iVol or tVol based;can go binary);=sum[shCurPos * opr.hedgeGa]
-    float hedge_dGamma = 433; // Aggregate Postion ($) Hedge Gamma
+    float hedge_delta = 428; // Aggregate Position Hedge Delta (either iVol or tVol based; can go binary);=sum[shCurPos * opr.hedgeDe]
+    float hedge_dDelta = 429; // Aggregate Position ($) Hedge Delta
+    float hedge_gamma = 430; // Aggregate Position Hedge Gamma (either iVol or tVol based;can go binary);=sum[shCurPos * opr.hedgeGa]
+    float hedge_dGamma = 433; // Aggregate Position ($) Hedge Gamma
+    float pin_xXhedge_delta = 434; // Aggregate Position Hedge Delta at Pin Strike
+    float pin_xXhedge_dDelta = 435; // Aggregate Position ($) Hedge Delta at Pin Strike
+    float pin_xXhedge_gamma = 437; // Aggregate Position Hedge Gamma at Pin Strike
+    float pin_xXhedge_dGamma = 438; // Aggregate Position ($) Hedge Gamma at Pin Strike
     float prem_ov_par = 436; // Aggregate Position Premium Over Parity;=sum[shCurPosM *  max(0, opr.optVolMark - opr.loBound)]
     float simp_prem_ov_par = 439; // Aggregate Position Premium Over Parity Simple;=sum[shCurPosM * max(0,  opr.opxMidMark - max(0, ±(strike - uprc)))]
     float wt_ve_dd = 442; // Aggregate Dd Time Weighted Vega; =sum[wtVega] if opr.xde < -0.30

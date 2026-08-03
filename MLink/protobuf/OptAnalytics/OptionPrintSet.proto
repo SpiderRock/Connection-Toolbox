@@ -87,7 +87,11 @@ message OptionPrintSet {
     float prt_ga = 256; // print gamma
     float prt_th = 259; // print theta
     float prt_ve = 262; // print vega
+    float prt_va = 263; // print vanna
+    float prt_vo = 264; // print volga
     float prt_ro = 265; // print rho
+    float prt_ph = 266; // print phi
+    float prt_de_decay = 267; // print delta decay
     string calc_err = 268; // calc error flag
     double syn_spot = 270; // Synthetic spot price (market-derived spot when the underlying is not a traded instrument)
     float surf_vol = 271; // SR surface volatility

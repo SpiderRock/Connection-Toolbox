@@ -46,6 +46,7 @@ message SpdrParentBrkrState {
     string alt_accnt = 127; // alternate (client assigned) "long" account string (optional)
     string alt_user_name = 130; // alternate (client assigned) user name (optional)
     SpdrStageType stage_type = 133; // parent is a staged order [ToolVisible]
+    YesNo visible_in_sV = 620; // allow order to be visible in SV (do not use for high volume of orders)
     YesNo is_flagged = 136; // broker state records is flagged for action (user alert only)
     TickerKey ticker = 139; // underlier ticker
     double u_prc = 142; // underlier price (usually mid-market)

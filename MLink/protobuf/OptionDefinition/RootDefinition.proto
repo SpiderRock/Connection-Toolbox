@@ -30,8 +30,8 @@ message RootDefinition {
 
     message Underlying_V7 {
         
-        TickerKey ticker__v7 = 5003; // only V7
-        float spc__v7 = 5004; // only V7
+        TickerKey ticker__v7 = 5004; // only V7
+        float spc__v7 = 5005; // only V7
     }
 
 
@@ -68,7 +68,7 @@ message RootDefinition {
     double strike_scale = 172; // manual strike price adjustment multiplier (used for some CME products if set, otherwise displayFactor is used) (okey_xx = strikePrice * manualStrikeScale)
     float strike_ratio = 175; // note: effective strike = strike * strikeRatio - cashOnExercise
     float cash_on_exercise = 178; // note: cashOnExercise is positive if it decreases the effective strike price
-    int32 underliers_per_cn = 181; // note: always 100 if underlying list is in use
+    double underliers_per_cn = 181; // note: always 100 if underlying list is in use
     double premium_mult = 184; // note: OCC premium/strike multiplier (usually 100)
     float symbol_ratio = 222; // note: currently used when AdjConvention is None, value of 0 implies symbolRatio is 1
     AdjConvention adj_convention = 187;
@@ -89,10 +89,11 @@ message RootDefinition {
     string description = 260; // product description (sourced from Activ FidName)
     google.protobuf.Timestamp timestamp = 232;
     PricingSource_V7 pricing_source__v7 = 5000; // only v7: enum values do not match with v8: V7[None=0,Native=1,SyntheticExpiry=2], V8[Does Not Exist]
-    string ric_code__v7 = 5001; // only V7
+    int32 underliers_per_cn__v7 = 5001; // only V7: Field name [underliersPerCn] matched but type did not: double != int
+    string ric_code__v7 = 5002; // only V7
     repeated Exchange exchange = 244;
     repeated Underlying underlying = 235;
-    repeated Underlying_V7 underlying__v7 = 5002;
+    repeated Underlying_V7 underlying__v7 = 5003;
 }
 
 

@@ -30,9 +30,9 @@ message GlobalRiskControl {
     float order_max_stk_dDelta = 107; // Maximum (abs) mny per stock parent order; ddelta = shares * pointValue * midPrc
     float order_max_fut_dDelta = 108; // Maximum (abs) mny per future parent order; ddelta = contracts * pointValue * midPrc
     float order_max_opt_dDelta = 109; // Maximum (abs) mny per option parent order; ddelta = contracts * pointValue * ABS(de) * uMidPrc
-    float stk_collar_pct = 110; // Maximum user limit vs bid/ask price control - percentage in decimals
-    float fut_collar_pct = 111; // Maximum user limit vs bid/ask price control - percentage in decimals
-    float opt_collar_pct = 112; // Maximum user limit vs bid/ask price control - percentage in decimals
+    float stk_collar_pct = 110; // Maximum user limit vs bid/ask price control - percentage as a number between 0 and 1 in decimals
+    float fut_collar_pct = 111; // Maximum user limit vs bid/ask price control - percentage as a number between 0 and 1 in decimals
+    float opt_collar_pct = 112; // Maximum user limit vs bid/ask price control - percentage as a number between 0 and 1 in decimals
     string modified_by = 113; // User that last modified this record
     SysEnvironment modified_in = 114; // Environment this record was last updated in
     google.protobuf.Timestamp timestamp = 115; // Timestamp of this record
