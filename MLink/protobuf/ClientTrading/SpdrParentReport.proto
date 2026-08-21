@@ -308,6 +308,8 @@ message SpdrParentReport {
     google.protobuf.Timestamp order_working_dttm = 295; // order send ack time (acknowleged working/new) (first exec report indicating the order is active)
     google.protobuf.Timestamp order_closed_dttm = 298; // order terminated ack time (first exec report indicating the order is in a terminal state;eg. cancelled, filled, rejected, etc)
     string order_closed_text = 301;
+    int32 display_size = 1132; // native on-exchange iceberg display size (FIX MaxFloor 111); 0 = show full size
+    DisplaySizeType display_size_type = 1133; // None=unset; Absolute=contracts/shares; Percent=% of orderSize
     int32 max_exposure_size = 1046; // maximum simultaneous cumulative child order public size exposure (-1 = orderActiveSize) [order can overfill if > orderActiveSize and numMakeExchanges > 1]
     PublicSizeHandling public_size = 1047; // public order size handling: None=algo default; Randomize=randomize public size; MktSize=expose typical market size; FullSize=expose entire order size where possible; FullSizeR=randomize full size
     YesNo can_overlap_cxl_repl = 1048; // can execution engines overlap cancel/replace operations [order can overfill if YES] (at most one active overlapping cxl/replace operation for each parent order)
@@ -316,6 +318,7 @@ message SpdrParentReport {
     int32 progress_slice_cnt = 1051; // number of slices to use (default = 4 or 8) [max 20]
     float vwap_participation = 1052; // target vwap participation rate (target % of trade activity)
     AuctionResponder auction_responder = 1053; // if set, parent order can be an auction responder
+    AtsAuctionEngage ats_auction_engage = 1135; // per-order ATS-auction engage: None=inherit account; Disable=no auctions; Flash/Block/Both=force-initiate that type
     float max_make_exch_fee = 1054; // maximum making exchange fee (in point value) [zero = no limit; use non-zero number for limit to apply]
     float max_take_exch_fee = 1055; // maximum taking exchange fee (in point value) [zero = no limit; use non-zero number for limit to apply]
     IncExchFee inc_take_exch_fee = 1056; // include exchange fee in probability and surface based take limit calculations
@@ -348,6 +351,7 @@ message SpdrParentReport {
     float take_surf_vol_offset = 1083; // default=0
     float take_surf_width_offset = 1084; // [-1.x to +1.x]       -1.0 = -0.5 * avgMktWidth, +1.0 = +0.5 * avgMktWidth
     double make_surf_prc_offset = 1085; // default=0
+    int32 make_surf_tick_offset = 1136; // default=0
     float make_surf_vol_offset = 1086; // default=0
     float make_surf_width_offset = 1087; // [-1.x to +1.x]       -1.0 = -0.5 * avgMktWidth, +1.0 = +0.5 * avgMktWidth
     float order_ref_event_mult = 1088;

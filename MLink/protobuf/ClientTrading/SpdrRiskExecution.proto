@@ -82,6 +82,7 @@ message SpdrRiskExecution {
     float risk_wt_vega = 355; // risk gamma
     float risk_nValue = 356; // risk delta
     float risk_delta = 357; // risk delta
+    float risk_dVanna = 372; // risk $vanna (signed $delta change per 1% vol point)
     float risk_dDelta = 358; // risk ddelta
     float risk_rm1 = 359; // user defined (from parent order) [used to manage order groups
     float risk_rm2 = 360; // user defined (from parent order) [used to manage order groups]
