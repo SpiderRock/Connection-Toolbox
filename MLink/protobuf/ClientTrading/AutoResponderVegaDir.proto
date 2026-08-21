@@ -48,8 +48,10 @@ message AutoResponderVegaDir {
     RoundRule round_rule = 132;
     int32 max_response_size = 117; // maximum number of contracts per response (will respond for 100% if auction size <= maxResponseSize)
     float max_response_vega = 133; // maximum total vega per response
+    float max_response_wt_vega = 166; // maximum weighted-time vega per response (0 = no limit)
     int32 total_response_size = 164; // maximum number of contracts (filled) all day (this responder record)
     float total_response_vega = 134; // maximum vega (filled) all day (this responder record)
+    float total_response_wt_vega = 167; // maximum weighted-time vega (filled) all day (0 = no limit)
     YesNo policy_auto_hedge = 165; // if yes, all option fills will be autoHedgePolicy eligible
     int64 risk_group_id = 125; // Default: 0 (none).
     float min_uPrc = 157; // min/max underlier price bounds (no responses while underlier is outside of bounds)

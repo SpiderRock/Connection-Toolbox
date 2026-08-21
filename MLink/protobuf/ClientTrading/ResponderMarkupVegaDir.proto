@@ -49,8 +49,10 @@ message ResponderMarkupVegaDir {
     RoundRule round_rule = 116;
     int32 max_response_size = 117; // maximum number of contracts per response (will respond for 100% if auction size <= maxResponseSize)
     float max_response_vega = 118; // maximum total vega per response
+    float max_response_wt_vega = 287; // maximum weighted-time vega per response (0 = no limit)
     float total_response_size = 224; // maximum number of contracts (filled) all day (this responder record)
     float total_response_vega = 119; // maximum vega (filled) all day (this responder record)
+    float total_response_wt_vega = 288; // maximum weighted-time vega (filled) all day (0 = no limit)
     YesNo policy_auto_hedge = 225; // if yes, all option fills will be autoHedgePolicy eligible
     int64 risk_group_id = 127; // Default: 0 (none).
     float min_uPrc = 226; // min/max underlier price bounds (no responses while underlier is outside of bounds)
@@ -80,6 +82,7 @@ message ResponderMarkupVegaDir {
     int32 zero_size_skips = 250; // number skipped from zero avail response size
     int32 total_size_skips = 251; // number skipped from total contract size limit
     int32 total_vega_skips = 252; // number skipped from total vega size limit
+    int32 total_wt_vega_skips = 290; // number skipped from total weighted-time vega limit
     int32 sys_error_skips = 253;
     int32 user_surf_skips = 254;
     int32 prob_error_skips = 255;
@@ -106,6 +109,7 @@ message ResponderMarkupVegaDir {
     int32 num_traded = 210;
     int32 qty_traded = 132;
     float vega_traded = 272;
+    float wt_vega_traded = 289; // cumulative weighted-time vega filled (all day)
     float sum_width_traded = 273; // SUM: marketWidth * trdQty      => AvgMktWidth = sumWidthTraded / qtyTraded
     float sum_surf_edge_traded = 274; // SUM: printEdge * trdQty        => AvgPrintEdge = sumSurfEdgeTraded / qtyTraded
     float sum_m1_pn_lTraded = 275; // SUM: M1PnL * trdQty            => AvgM1PnL = sumM1PnLTraded / qtyTraded

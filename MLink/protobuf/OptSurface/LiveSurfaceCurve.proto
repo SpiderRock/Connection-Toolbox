@@ -47,6 +47,7 @@ message LiveSurfaceCurve {
     float axis_fUPrc = 163; // axis FwdUPrc (fwd underlying price used to compute xAxis)
     double syn_spot = 166; // Synthetic spot price (market-derived spot when the underlying is not a traded instrument)
     double syn_carry = 169; // Synthetic carry rate; corresponds to the relationship between uPrc and synSpot (set when the underlying is not a traded instrument)
+    double syn_spot_driver_ratio = 170; // Ratio of synthetic spot to underlier driver price (set when underlying is not a traded instrument)
     float atm_strike = 172; // synthetic strike with cPrice = pPrice
     MoneynessType moneyness_type = 175; // moneyness (xAxis) convention
     UnderlierMode underlier_mode = 178; // underlier pricing mode (None=use spot/stock market; FrontMonth=use front month future market * uPrcRatio; Actual = use actual underlier future market)

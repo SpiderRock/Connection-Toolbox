@@ -55,6 +55,7 @@ message SpdrParentLimit {
     float take_surf_vol_offset = 178; // default=0
     float take_surf_width_offset = 181; // [-1.x to +1.x]       -1.0 = -0.5 * avgMktWidth, +1.0 = +0.5 * avgMktWidth
     double make_surf_prc_offset = 184; // default=0
+    int32 make_surf_tick_offset = 426; // default=0
     float make_surf_vol_offset = 187; // default=0
     float make_surf_width_offset = 190; // [-1.x to +1.x]       -1.0 = -0.5 * avgMktWidth, +1.0 = +0.5 * avgMktWidth
     float order_ref_event_mult = 193;

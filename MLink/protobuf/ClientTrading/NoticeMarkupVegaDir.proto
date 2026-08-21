@@ -40,8 +40,10 @@ message NoticeMarkupVegaDir {
     PKey pkey = 2;
     int32 qty_traded = 100;
     float vega_traded = 101;
+    float wt_vega_traded = 154;
     int32 cum_open_size = 102;
     float cum_open_vega = 103;
+    float cum_open_wt_vega = 155;
     int32 resp_size = 104;
     float min_surf_edge = 105;
     float user_surf_limit = 106;

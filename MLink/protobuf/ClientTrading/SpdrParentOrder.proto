@@ -166,6 +166,8 @@ message SpdrParentOrder {
     int32 order_active_size = 187; // total activated size (total size released for execution) (-1 = all available size)
     int32 cur_cum_fill_quantity = 190; // set order size = orderSize - Max(0, curCumFillQty - ee.cumFillQty) (used to ensure integrity of submitted cxl/replace orders)
     YesNo add_cum_fill_quantity = 193; // If Yes then OrderSize is calculated @ order arrival as requested OrderSize + existing 'CumFillQuantity'.
+    int32 display_size = 1088; // native on-exchange iceberg display size (FIX MaxFloor 111); 0 = show full size (ARCA, core session)
+    DisplaySizeType display_size_type = 1089; // None=unset (EE defaults to Absolute pending GUI); Absolute=contracts/shares; Percent=% of orderSize
     int32 max_exposure_size = 196; // maximum simultaneous cumulative child order public size exposure (-1 = orderActiveSize) [order can overfill if > orderActiveSize and numMakeExchanges > 1]
     int32 num_make_exchanges = 199; // number of exchanges (1 - 4) on which to publish public making orders.  Effective number might be less than requested number if sufficient exchanges are not available.
     PublicSizeHandling public_size = 202; // public order size handling: None=algo default; Randomize=randomize public size; MktSize=expose typical market size; FullSize=expose entire order size where possible; FullSizeR=randomize full size
@@ -179,7 +181,7 @@ message SpdrParentOrder {
     TriggerType trigger_type = 226; // type of trigger (PrintVol/SurfVol only for options) [print = print or actionable quote]
     float trigger_level = 229; // stop/trigger level for parent order to go active (can be either a price or vol)
     AuctionResponder auction_responder = 232; // if set, parent order can be an auction responder [None=inherit account; Any=force-on; Disable=force-off exchange/away auction responding]
-    AtsAuctionEngage ats_auction_engage = 1076; // per-order opt-out of SR ATS auctions: None=inherit account algoFlash/algoBlockPct; Disable=do not algo-initiate flash/block AND do not respond to SR flash auctions
+    AtsAuctionEngage ats_auction_engage = 1076; // per-order override of account ATS-auction config: None=inherit account algoFlash/algoBlockPct; Disable=no algo-initiated auctions AND don't respond to SR flash; Flash/Block/Both=force-initiate that type regardless of account pct
     float max_make_exch_fee = 235; // maximum making exchange fee (in point value) [zero = no limit; use non-zero number for limit to apply]
     float max_take_exch_fee = 238; // maximum taking exchange fee (in point value) [zero = no limit; use non-zero number for limit to apply]
     IncExchFee inc_take_exch_fee = 241; // include exchange fee in probability and surface based take limit calculations
@@ -229,6 +231,7 @@ message SpdrParentOrder {
     float take_surf_vol_offset = 373; // default=0
     float take_surf_width_offset = 376; // [-1.x to +1.x]       -1.0 = -0.5 * avgMktWidth, +1.0 = +0.5 * avgMktWidth
     double make_surf_prc_offset = 379; // default=0
+    int32 make_surf_tick_offset = 1090; // default=0  ; +/-1 tick off surface (EE applies live GetTickSize)
     float make_surf_vol_offset = 382; // default=0
     float make_surf_width_offset = 385; // [-1.x to +1.x]       -1.0 = -0.5 * avgMktWidth, +1.0 = +0.5 * avgMktWidth
     float order_ref_event_mult = 388; // expected underlier abs move (0.01 = 1%) @ orderRefEventDttm
